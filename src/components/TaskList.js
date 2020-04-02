@@ -8,7 +8,15 @@ const TaskList = props => {
           <li key={task}>
             <p>
               Task: {task}
-              <button onClick={() => props.deleteTask(task)}>Delete</button>
+              <button
+                onClick={() => {
+                  console.log(task);
+                  props.deleteTask(task);
+                  props.decrementCounter();
+                }}
+              >
+                Delete
+              </button>
             </p>
           </li>
         );

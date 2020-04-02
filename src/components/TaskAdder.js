@@ -6,7 +6,12 @@ class TaskAdder extends React.Component {
   };
   render() {
     return (
-      <form onSubmit={this.handleTask}>
+      <form
+        onSubmit={event => {
+          this.handleTask(event);
+          this.props.incrementCounter();
+        }}
+      >
         <input
           id='task'
           type='text'
