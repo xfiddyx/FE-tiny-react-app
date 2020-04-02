@@ -7,8 +7,14 @@ class TaskAdder extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleTask}>
-        <input id='task' type='text' onChange={this.handleTaskAdded} />
-        <input id='submitButton' type='submit' value='add' />
+        <input
+          id='task'
+          type='text'
+          required
+          onChange={this.handleTaskAdded}
+          value={this.state.userInput}
+        />
+        <input id='submitButton' type='submit' value='Add Task' />
       </form>
     );
   }

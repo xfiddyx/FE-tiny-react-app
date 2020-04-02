@@ -16,14 +16,21 @@ class App extends React.Component {
       <div className='App'>
         <Header name={user} />
         <TaskAdder addTask={this.addTask} />
-        <TaskList taskList={this.state.taskList} />
+        <TaskList taskList={this.state.taskList} deleteTask={this.deleteTask} />
       </div>
     );
   }
+
   addTask = addedTask => {
     this.setState(currentState => {
       return { taskList: [...currentState.taskList, addedTask] };
     });
+  };
+  deleteTask = deletedTask => {
+    const amendedTasks = this.state.taskList.filter(
+      task => task !== deletedTask
+    );
+    this.setState({ taskList: amendedTasks });
   };
 }
 export default App;
