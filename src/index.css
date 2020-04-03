@@ -19,3 +19,13 @@ code {
 ul {
   list-style: none;
 }
+.form {
+  width: 50%;
+  text-align: right;
+}
+#overdue {
+  color: red;
+}
+#notoverdue {
+  color: black;
+}

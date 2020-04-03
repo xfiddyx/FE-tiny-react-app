@@ -13,8 +13,6 @@ class App extends React.Component {
     taskCounter: 0
   };
   render() {
-    console.log(this.state);
-
     return (
       <div className='App'>
         <Header name={user} />
@@ -25,6 +23,8 @@ class App extends React.Component {
         />
         <TaskList
           taskList={this.state.taskList}
+          // overdue={this.state.overdue}
+          // checkDeadline={this.checkDeadline}
           deleteTask={this.deleteTask}
           decrementCounter={this.decrementCounter}
         />
@@ -32,26 +32,55 @@ class App extends React.Component {
     );
   }
 
-  addTask = addedTask => {
+  addTask = (addedTask, deadline) => {
     this.setState(currentState => {
-      return { taskList: [...currentState.taskList, addedTask] };
+      return {
+        taskList: [
+          ...currentState.taskList,
+          { task: addedTask, deadline: deadline }
+        ]
+      };
     });
   };
-  deleteTask = event => {
-    const amendedTasks = this.state.taskList.filter(task => task !== event);
+
+  deleteTask = taskToDelete => {
+    const amendedTasks = this.state.taskList.filter(
+      task => task.task !== taskToDelete
+    );
     this.setState({ taskList: amendedTasks });
+
+    // refactor to use currentstate
   };
   incrementCounter = () => {
     this.setState(currentState => {
       return {
-        taskCounter: (currentState.taskCounter += 1)
+        taskCounter: currentState.taskCounter + 1
       };
     });
   };
   decrementCounter = () => {
     this.setState(currentState => {
-      return { taskCounter: (currentState.taskCounter -= 1) };
+      return { taskCounter: currentState.taskCounter - 1 };
     });
   };
 }
+
 export default App;
+
+// checkDeadline = event => {
+//   console.log(event);
+//   this.setState(currentState => {
+//     let overdue;
+//     if (new Date(event) < new Date()) {
+//       overdue = 'overdue';
+//       return {
+//         overdue: [...currentState.overdue, overdue]
+//       };
+//     } else {
+//       overdue = 'notoverdue';
+//       return {
+//         overdue: [...currentState.overdue, overdue]
+//       };
+//     }
+//   });
+// };
