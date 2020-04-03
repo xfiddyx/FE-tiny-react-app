@@ -36,11 +36,7 @@ class TaskList extends React.Component {
                     {new Date(task.deadline).toLocaleDateString()}
                     <button
                       onClick={() => {
-                        if (
-                          window.confirm(
-                            'Are you sure you wish to delete this item?'
-                          )
-                        )
+                        if (window.confirm('...you definitely done it'))
                           this.props.deleteTask(task.task);
                         this.props.decrementCounter();
                       }}

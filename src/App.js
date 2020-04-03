@@ -13,6 +13,7 @@ class App extends React.Component {
     taskCounter: 0
   };
   render() {
+    console.log(this.state);
     return (
       <div className='App'>
         <Header name={user} />
@@ -44,10 +45,12 @@ class App extends React.Component {
   };
 
   deleteTask = taskToDelete => {
-    const amendedTasks = this.state.taskList.filter(
-      task => task.task !== taskToDelete
-    );
-    this.setState({ taskList: amendedTasks });
+    this.setState(currentState => {
+      const amendedTasks = currentState.taskList.filter(
+        task => task.task !== taskToDelete
+      );
+      return { taskList: amendedTasks };
+    });
 
     // refactor to use currentstate
   };
@@ -66,21 +69,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// checkDeadline = event => {
-//   console.log(event);
-//   this.setState(currentState => {
-//     let overdue;
-//     if (new Date(event) < new Date()) {
-//       overdue = 'overdue';
-//       return {
-//         overdue: [...currentState.overdue, overdue]
-//       };
-//     } else {
-//       overdue = 'notoverdue';
-//       return {
-//         overdue: [...currentState.overdue, overdue]
-//       };
-//     }
-//   });
-// };
