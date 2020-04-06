@@ -3,14 +3,15 @@ import React from 'react';
 class TaskAdder extends React.Component {
   state = {
     userInput: '',
-    deadline: ''
+    deadline: '',
   };
   render() {
     return (
       <h2>
         Give yourself something to do!
+        <></>
         <form
-          onSubmit={event => {
+          onSubmit={(event) => {
             this.handleTask(event);
             this.props.incrementCounter();
           }}
@@ -23,6 +24,7 @@ class TaskAdder extends React.Component {
             value={this.state.userInput}
           />
           <input
+            id='deadline'
             type='date'
             name='deadline'
             required
@@ -34,12 +36,12 @@ class TaskAdder extends React.Component {
     );
   }
 
-  handleTaskAdded = event => {
+  handleTaskAdded = (event) => {
     const userInput = event.target.value;
     this.setState({ userInput });
   };
 
-  handleTask = event => {
+  handleTask = (event) => {
     event.preventDefault();
     this.props.addTask(
       this.state.userInput,
@@ -48,7 +50,7 @@ class TaskAdder extends React.Component {
     );
     this.setState({ userInput: '' });
   };
-  handleDeadline = event => {
+  handleDeadline = (event) => {
     const deadline = event.target.value;
     this.setState({ deadline });
   };

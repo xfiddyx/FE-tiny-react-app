@@ -10,10 +10,11 @@ const user = 'Steven';
 class App extends React.Component {
   state = {
     taskList: [],
-    taskCounter: 0
+    taskCounter: 0,
   };
+
   render() {
-    console.log(this.state);
+    const { taskList, taskCounter } = this.state;
     return (
       <div className='App'>
         <Header name={user} />
@@ -24,45 +25,68 @@ class App extends React.Component {
         />
         <TaskList
           taskList={this.state.taskList}
-          // overdue={this.state.overdue}
-          // checkDeadline={this.checkDeadline}
           deleteTask={this.deleteTask}
           decrementCounter={this.decrementCounter}
         />
       </div>
     );
   }
+  componentDidMount() {
+    const local = localStorage.getItem('taskList') || 'null';
+    const taskList = JSON.parse(local);
+    const counter = localStorage.getItem('taskCounter') || 'null';
+    const taskCounter = JSON.parse(counter);
+    if (taskList)
+      this.setState({
+        taskList,
+        taskCounter,
+      });
+  }
 
   addTask = (addedTask, deadline) => {
-    this.setState(currentState => {
-      return {
-        taskList: [
-          ...currentState.taskList,
-          { task: addedTask, deadline: deadline }
-        ]
-      };
-    });
+    this.setState(
+      (currentState) => {
+        return {
+          taskList: [
+            ...currentState.taskList,
+            { task: addedTask, deadline: deadline },
+          ],
+        };
+      },
+      () => {
+        this.saveTaskList();
+      }
+    );
   };
 
-  deleteTask = taskToDelete => {
-    this.setState(currentState => {
-      const amendedTasks = currentState.taskList.filter(
-        task => task.task !== taskToDelete
-      );
-      return { taskList: amendedTasks };
-    });
+  saveTaskList = () => {
+    const { taskList, taskCounter } = this.state;
+    localStorage.setItem('taskList', JSON.stringify(taskList));
+    localStorage.setItem('taskCounter', JSON.stringify(taskCounter));
+  };
 
-    // refactor to use currentstate
+  deleteTask = (taskToDelete) => {
+    this.setState(
+      (currentState) => {
+        const amendedTasks = currentState.taskList.filter(
+          (task) => task.task !== taskToDelete
+        );
+        return { taskList: amendedTasks };
+      },
+      () => {
+        this.saveTaskList();
+      }
+    );
   };
   incrementCounter = () => {
-    this.setState(currentState => {
+    this.setState((currentState) => {
       return {
-        taskCounter: currentState.taskCounter + 1
+        taskCounter: currentState.taskCounter + 1,
       };
     });
   };
   decrementCounter = () => {
-    this.setState(currentState => {
+    this.setState((currentState) => {
       return { taskCounter: currentState.taskCounter - 1 };
     });
   };

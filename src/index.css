@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: #f1e2aa;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -12,20 +13,63 @@ code {
     monospace;
 }
 
-#task {
-  width: 30%;
+header {
+  font-size: 50px;
+  font-family: 'inria-sans', 'sans-serif';
 }
 
+h1 {
+  margin-bottom: 10px;
+  background-color: #a0b0b9;
+}
+h2 {
+  font-family: 'inria-sans', sans-serif;
+}
+
+#task {
+  width: 30%;
+  padding: 10px;
+  line-height: 40%;
+  font-size: 20px;
+  position: relative;
+}
+#text {
+  padding: 10%;
+}
+#deadline {
+  padding-top: 10px;
+  margin: 30px;
+  font-size: 20px;
+  border: 2px solid black;
+  text-align: center;
+  line-height: 110%;
+  right: 16px;
+  top: 260px;
+  position: absolute;
+}
 ul {
   list-style: none;
 }
 .form {
   width: 50%;
+  height: 10%;
   text-align: right;
 }
+
 #overdue {
   color: red;
 }
 #notoverdue {
   color: black;
+}
+
+#submitButton {
+  background-color: #ceaf3e; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Header = props => {
+const Header = (props) => {
   return (
     <header>
-      <h1 key={props.name}>{`${props.name}'s to do list`}</h1>
+      <h1> Task List</h1>
     </header>
   );
 };
